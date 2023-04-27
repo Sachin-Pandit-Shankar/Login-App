@@ -1,23 +1,41 @@
 // Write your code here
+// Write your code here
 import {Component} from 'react'
-import './index.css'
-import Message from '../Message'
-import Logout from '../Logout'
 import Login from '../Login'
+import Logout from '../Logout'
+import Message from '../Message'
+import './index.css'
 
 class Home extends Component {
-  state = {isLogged: true}
+  state = {isLogin: false}
+
+  changeStatus = () => {
+    const {isLogin} = this.state
+    this.setState({isLogin: !isLogin})
+  }
 
   render() {
-    const {isLogged} = this.state
+    const {isLogin} = this.state
+
+    let messageEl
+    let btnEl
+
+    if (isLogin === true) {
+      messageEl = <Message content="Welcome User" />
+      btnEl = <Login changeStatus={this.changeStatus} />
+    } else {
+      messageEl = <Message content="Please Login" />
+      btnEl = <Logout changeStatus={this.changeStatus} />
+    }
     return (
       <div className="bg-container">
         <div className="container">
-          {isLogged ? <Message /> : <h1 className="heading">Please Login</h1>}
-          {isLogged ? <Logout /> : <Login />}
+          {messageEl}
+          {btnEl}
         </div>
       </div>
     )
   }
 }
 export default Home
+
