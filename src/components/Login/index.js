@@ -1,14 +1,13 @@
 // Write your code here
-import {Component} from 'react'
 import './index.css'
 
-class Login extends Component {
-  render() {
-    return (
-      <button type="button" className="button">
-        Login
-      </button>
-    )
-  }
+const Login = props => {
+  const {changeStatus} = props
+
+  return (
+    <button type="button" onClick={changeStatus} className="button">
+      Logout
+    </button>
+  )
 }
 export default Login
